@@ -1,4 +1,8 @@
-﻿CREATE TABLE "campaign" (
+﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+
+
+CREATE TABLE "campaign" (
     "cf_id" int   NOT NULL,
     "contact_id" int   NOT NULL,
     "company_name" varchar(100)   NOT NULL,
@@ -44,6 +48,17 @@ CREATE TABLE "contacts" (
      )
 );
 
+CREATE TABLE "backers" (
+    "backer_id" varchar   NOT NULL,
+    "cf_id" int   NOT NULL,
+    "first_name" varchar(50)   NOT NULL,
+    "last_name" varchar(50)   NOT NULL,
+    "email" varchar(100)   NOT NULL,
+    CONSTRAINT "pk_backers" PRIMARY KEY (
+        "backer_id"
+     )
+);
+
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
 REFERENCES "contacts" ("contact_id");
 
@@ -53,7 +68,8 @@ REFERENCES "category" ("category_id");
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
 REFERENCES "subcategory" ("subcategory_id");
 
-SELECT * FROM contacts;
-SELECT * FROM category;
-SELECT * FROM subcategory;
-SELECT * FROM campaign;
+ALTER TABLE "backers" ADD CONSTRAINT "fk_backers_cf_id" FOREIGN KEY("cf_id")
+REFERENCES "campaign" ("cf_id");
+
+DROP TABLE backers CASCADE;
+SELECT * FROM backers;
