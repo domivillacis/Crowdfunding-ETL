@@ -72,4 +72,8 @@ ALTER TABLE "backers" ADD CONSTRAINT "fk_backers_cf_id" FOREIGN KEY("cf_id")
 REFERENCES "campaign" ("cf_id");
 
 DROP TABLE backers CASCADE;
+DROP TABLE campaign CASCADE;
+
 SELECT * FROM backers;
+SELECT * FROM campaign;
+SELECT * FROM contacts;
