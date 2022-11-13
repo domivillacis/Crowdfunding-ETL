@@ -21,17 +21,16 @@ ORDER BY "Total Backers" DESC;
 SELECT ct.first_name,
 	ct.last_name,
 	ct.email,
-	ca.goal as "Remaining Goal Amount"
--- INTO email_contacts_remaining_goal_amount 
+	(ca.goal-ca.pledged) as "Remaining Goal Amount"
+INTO email_contacts_remaining_goal_amount 
 FROM contacts as ct
-	INNER JOIN campaign AS ca
-		ON (ca.cf_id = ca.cf_id)
+JOIN campaign AS ca
+ON (ct.contact_id = ca.contact_id)
 WHERE ca.outcome = 'live'
 ORDER BY "Remaining Goal Amount" DESC;
 
-
 -- Check the table
---SELECT * FROM email_contacts_remaining_goal_amount;
+SELECT * FROM email_contacts_remaining_goal_amount;
 
 -- 4. (5 pts)
 -- Create a table, "email_backers_remaining_goal_amount" that contains the email address of each backer in descending order, 
@@ -41,17 +40,18 @@ ORDER BY "Remaining Goal Amount" DESC;
 SELECT b.email,
 	b.first_name,
 	b.last_name,
-	ca.cf_id,
-	ca.company_name,
-	ca.description,
-	ca.end_date,
-	ca.goal AS "Left of Goal"
---INTO email_backers_remaining_goal_amount
+	b.cf_id,
+	c.company_name,
+	c.description,
+	c.end_date,
+	(c.goal-c.pledged) AS "Left of Goal"
+INTO email_backers_remaining_goal_amount
 FROM backers as b
-	INNER JOIN campaign as ca
-	ON (b.cf_id = ca.cf_id)
+JOIN campaign as c
+ON (b.cf_id = c.cf_id)
+WHERE c.outcome = 'live'
 ORDER BY b.email DESC;
 
 -- Check the table
-
+SELECT * FROM email_backers_remaining_goal_amount
 
