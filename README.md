@@ -1,7 +1,7 @@
 # Crowdfunding ETL
 
 ## Project overview
-This analysis consists of helping Independent Funding, a crowdfunding platform to move their data from a large excel file to a PostgreSQL database.
+This analysis consists of helping Independent Funding, a crowdfunding platform, to move their data from a large excel file to a PostgreSQL database.
 
 To do this, we are going to use the ETL (Extract, Transform and Load) process that will help us clean and transform raw data into readable files and work on them with SQL.
 
